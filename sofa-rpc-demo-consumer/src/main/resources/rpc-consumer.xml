@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:sofa="http://sofastack.io/schema/sofaboot"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://sofastack.io/schema/sofaboot   http://sofastack.io/schema/sofaboot.xsd"
+       default-autowire="byName">
+
+    <sofa:reference interface="com.example.sofa.rpc.demo.api.service.IHelloService" id="helloService">
+        <sofa:binding.bolt />
+    </sofa:reference>
+
+    <sofa:reference interface="com.example.sofa.rpc.demo.api.service.IFutureService" id="futureService">
+        <sofa:binding.bolt >
+            <sofa:global-attrs type="future"></sofa:global-attrs>
+        </sofa:binding.bolt>
+    </sofa:reference>
+
+    <bean id="responseCallback" class="com.example.sofa.rpc.demo.consumer.callback.ResponseCallback"/>
+
+    <sofa:reference interface="com.example.sofa.rpc.demo.api.service.ICallbackService" id="callbackService">
+        <sofa:binding.bolt >
+            <sofa:global-attrs type="callback" callback-ref="responseCallback"></sofa:global-attrs>
+        </sofa:binding.bolt>
+    </sofa:reference>
+
+    <sofa:reference jvm-first="false" id="genericService" interface="com.alipay.sofa.rpc.api.GenericService">
+        <sofa:binding.bolt>
+            <sofa:global-attrs generic-interface="com.example.sofa.rpc.demo.provider.service.IGenericService"/>
+        </sofa:binding.bolt>
+    </sofa:reference>
+
+
+
+
+</beans>

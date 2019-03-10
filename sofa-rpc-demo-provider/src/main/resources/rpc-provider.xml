@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:sofa="http://sofastack.io/schema/sofaboot"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://sofastack.io/schema/sofaboot   http://sofastack.io/schema/sofaboot.xsd"
+       default-autowire="byName">
+
+    <bean id="helloService" class="com.example.sofa.rpc.demo.provider.service.HelloServiceImpl"/>
+    <bean id="futureService" class="com.example.sofa.rpc.demo.provider.service.FutureServiceImpl"/>
+    <bean id="callbackService" class="com.example.sofa.rpc.demo.provider.service.CallbackServiceImpl"/>
+    <bean id="genericService" class="com.example.sofa.rpc.demo.provider.service.GenericServiceImpl"/>
+
+    <sofa:service ref="helloService" interface="com.example.sofa.rpc.demo.api.service.IHelloService">
+        <sofa:binding.bolt/>
+    </sofa:service>
+
+    <sofa:service ref="futureService" interface="com.example.sofa.rpc.demo.api.service.IFutureService">
+        <sofa:binding.bolt/>
+    </sofa:service>
+
+    <sofa:service ref="callbackService" interface="com.example.sofa.rpc.demo.api.service.ICallbackService">
+        <sofa:binding.bolt/>
+    </sofa:service>
+    
+    <sofa:service ref="genericService" interface="com.example.sofa.rpc.demo.provider.service.IGenericService">
+        <sofa:binding.bolt/>
+    </sofa:service>
+
+</beans>
